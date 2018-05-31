@@ -42,6 +42,7 @@ public class BuscaAlunoServlet extends HttpServlet {
 		String nomeCurso = "";
 		String nomeCampus = "";
                 String idTermoEstagioAtivo = "";
+                String tipoAluno = "";
 		
 		Aluno aluno = AlunoServices.buscarAlunoByMatricula(matricula.trim());
 		if(aluno != null) {
@@ -77,6 +78,7 @@ public class BuscaAlunoServlet extends HttpServlet {
 				.add("nomeCurso", nomeCurso)
 				.add("nomeCampus", nomeCampus)
                                 .add("idTermoEstagioAtivo", idTermoEstagioAtivo)
+                                .add("tipoAluno", tipoAluno)
 				.build();
 		
 		StringWriter stWriter = new StringWriter();

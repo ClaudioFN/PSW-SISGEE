@@ -30,6 +30,9 @@ public class Aluno {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Pessoa pessoa;
 
+	@Column(length = 50)
+	private String tipoAluno;            
+        
 	@OneToOne(fetch = FetchType.EAGER)
 	private Curso curso;
 

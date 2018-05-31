@@ -64,7 +64,7 @@ public class TermoEstagioServices {
 		}
 	}
 	
-	public static void incluirTermoEstagio(TermoEstagio termoEstagio, Empresa empresa, AgenteIntegracao agenteIntegracao){
+	public static void incluirTermoEstagio(TermoEstagio termoEstagio, Convenio convenio){
 		
 		/**
 		 * Lógica de negócio
@@ -84,11 +84,14 @@ public class TermoEstagioServices {
 		PersistenceManager.getTransaction().begin();
 		try{
 			
-			GenericDAO<Empresa> empresaDao = PersistenceManager.createGenericDAO(Empresa.class);
-			Empresa emp = empresaDao.buscar(empresa.getIdEmpresa());
+			//GenericDAO<Empresa> empresaDao = PersistenceManager.createGenericDAO(Empresa.class);
+			//Empresa emp = empresaDao.buscar(empresa.getIdEmpresa());
+                        
+			GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);
+			Convenio con = convenioDao.buscar(convenio.getIdConvenio());                        
 			
 			// É Agente de Integração?
-			if(agenteIntegracao != null) {
+			/*if(agenteIntegracao != null) {
 				
 				// Empresa já está ligada ao Agente de Integração?
 				Boolean atualizarAI = true;
@@ -104,17 +107,17 @@ public class TermoEstagioServices {
 					GenericDAO<AgenteIntegracao> agenteIntegracaoDao = PersistenceManager.createGenericDAO(AgenteIntegracao.class);
 					AgenteIntegracao ai = agenteIntegracaoDao.buscar(agenteIntegracao.getIdAgenteIntegracao());
 					//emp.setAgenteIntegracao(ai);
-					empresaDao.alterar(emp);
+					convenioDao.alterar(con);
 				}
 			}
-			
+			*/
 			// Convênio já existe para a Empresa selecionada?
-			Convenio conv = ConvenioServices.buscarConvenioByNumeroEmpresa(termoEstagio.getConvenio().getNumeroConvenio(), emp);
+			Convenio conv = ConvenioServices.buscarConvenioByNumeroConvenio(termoEstagio.getConvenio().getNumeroConvenio());
 			if(conv != null) {
 				// SIM - Encapsular em termo estagio
 				termoEstagio.setConvenio(conv);
 			}
-			else {
+			/*else {
 				// NÃO - Criar novo convênio e encapsular
 				GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);
 				conv = termoEstagio.getConvenio();
@@ -124,7 +127,7 @@ public class TermoEstagioServices {
 				System.out.println("Dados conv: " + conv.getIdConvenio() + ", " + conv.getNumeroConvenio() + ", " + conv.getEmpresa().getRazaoSocial());
 				termoEstagio.setConvenio(conv);
 			}
-			
+			*/
 			// encapsula aluno
 			GenericDAO<Aluno> alunoDao = PersistenceManager.createGenericDAO(Aluno.class);
 			Aluno al = alunoDao.buscar(termoEstagio.getAluno().getIdAluno());

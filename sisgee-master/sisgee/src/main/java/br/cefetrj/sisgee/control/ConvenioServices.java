@@ -90,6 +90,7 @@ public class ConvenioServices {
             Convenio a = convenioDao.buscarByNumero(numero);
             return a;
         } catch (Exception e) {
+            System.out.println("Exception do buscarConvenioByNumeroConvenio " + e);
             return null;
         }
     }
