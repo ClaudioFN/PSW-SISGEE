@@ -85,6 +85,14 @@ public class Aluno {
 		this.termoEstagios = termoEstagios;
 	}
 
+        public String getTipoAluno() {
+            return tipoAluno;
+        }
+
+        public void setTipoAluno(String tipoAluno) {
+            this.tipoAluno = tipoAluno;
+        }        
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

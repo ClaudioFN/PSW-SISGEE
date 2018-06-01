@@ -88,7 +88,7 @@
                                 <label for="numeroConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.numeroConvenio"/></label>
                                     <div class="input-group">
                                            <input type="hidden" class="form-control numeroConvenio numeroConvenio"  id="numeroConvenio1" name="numeroConvenio1" value="${ param.numeroConvenio}">
-                                            <input type="text" class="form-control ${ not empty numeroConvenioMsg ? 'is-invalid': 'is-valid' } numeroConvenio" id="numeroConvenio" name="numeroConvenio" maxlength="10" value="${ param.numeroConvenio }" >
+                                            <input type="text" class="form-control ${ not empty numeroConvenioMsg ? 'is-invalid': 'is-valid' } numeroConvenio" id="numeroConvenio" name="numeroConvenio" maxlength="10" value="${ param.numeroConvenio }" placeholder="<fmt:message key = "br.cefetrj.sisgee.resources.form.placeholder_numeroConvenio"/>">
                                             <span class="input-group-btn">
                                                 <button class="btn btn-primary" type="button" id="btnBuscarConvenio" ><fmt:message key = "br.cefetrj.sisgee.resources.form.buscar"/></button>
                                             </span>    
@@ -101,7 +101,7 @@
                              <label for="nomeConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.nomeConvenio"/></label>
                                 <div class="input-group">
                                    <input type="hidden" class="form-control nomeConvenio nomeConvenio"  id="nomeConvenio1" name="nomeConvenio1" value="${ param.nomeConvenio}">                      
-                                   <input type="text" class="form-control ${ not empty nomeConvenioMsg ? 'is-invalid': 'is-valid' } nomeConvenio" id="nomeConvenio" name="nomeConvenio" maxlength="100"  value="${ param.nomeConvenio }" >                            
+                                   <input type="text" class="form-control ${ not empty nomeConvenioMsg ? 'is-invalid': 'is-valid' } nomeConvenio" placeholder="<fmt:message key="br.cefetrj.sisgee.resources.form.placeholder_nomeConvenio"/>" id="nomeConvenio" name="nomeConvenio" maxlength="100"  value="${ param.nomeConvenio }" >                            
                                    <span class="input-group-btn">
                                        <button class="btn btn-primary" type="button" id="btnBuscarNomeConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.buscar"/></button>
                                    </span>   
@@ -135,14 +135,14 @@
                                  <div class="form-group d-block my-3">
                                      <label for="isAgenteIntegracao"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_agente_integracao"/></label>
                                      <label class="custom-control custom-radio">
-
-                                         <input id="agenteSim" class="custom-control-input" type="radio" name="isAgenteIntegracao" ${param.agenteSim} value="true"> 
+                                         
+                                         <input id="agenteSim" class="custom-control-input" type="radio" name="isAgenteIntegracao" <c:set var="variavel2" value="checked" scope="page"/> value="true"> 
                                          <span class="custom-control-indicator"></span> 
                                          <span class="custom-control-description" ><fmt:message key = "br.cefetrj.sisgee.resources.form.sim"/></span><!-- AQUI SELECIONA SIM PARA AGENTE DE INTEGRACAO-->
                                      </label>						
 
                                      <label class="custom-control custom-radio">
-                                         <input id="agenteNao" class="custom-control-input" type="radio" name="isAgenteIntegracao" ${variavel2 } value="false"> 
+                                         <input id="agenteNao" class="custom-control-input" type="radio" name="isAgenteIntegracao" <%=pageContext.getAttribute("variavel2")%> value="false"> 
                                          <span class="custom-control-indicator"></span> 
                                          <span class="custom-control-description"><fmt:message key = "br.cefetrj.sisgee.resources.form.nao"/></span><!-- AQUI SELECIONA NAO PARA AGENTE DE INTEGRACAO-->
                                      </label>
@@ -391,6 +391,7 @@
     <%@include file="import_footer.jspf"%>
     <%@include file="import_finalbodyscripts.jspf"%>
     <%@include file="import_scripts.jspf"%>
+
     <script>
         $(document).ready(function () {
             var tamanho = $("#cnpjEcpf1").val().length;
@@ -407,11 +408,15 @@
         
         
         function alerta(){
-            alert("aqui");
+            var agente = document.getElementById('setaAgente').value;
+            if(agente == "checked"){
+                document.getElementById('setaAgente').
+            }
+            
         }
         
         function sugereData() {
-            //var data = new Date(document.getElementById('dataInicioTermoEstagio').value);
+
             var tipoDeAluno = document.getElementById('tipoAluno').value;
 
             var data = document.getElementById('dataInicioTermoEstagio').value;
@@ -420,20 +425,21 @@
             var ano = data.substring(6, 10);
             
             var dataNova = new Date(mes + "-" + dia + "-" + ano);
-            var tipoDeAluno = "";
-            if(tipoDeAluno != null){            
-                if (tipoDeAluno == "tecnico") {
+
+            if(tipoDeAluno != null || tipoDeAluno != ""){            
+                if (tipoDeAluno == 'TECNICO') {
                     dataNova.setMonth(dataNova.getMonth() + 6);
                     tipoDeAluno = "Curso Técnico";
-                }else{
+                    document.getElementById("dataIni").innerHTML = "Esse Estágio terminaria em " + dataNova.toLocaleDateString() + " para este aluno de " + tipoDeAluno;
+                }else if(tipoDeAluno == 'GRADUACAO'){
                     dataNova.setMonth(dataNova.getMonth() + 12);
                     tipoDeAluno = "Graduação";
+                    document.getElementById("dataIni").innerHTML = "Esse Estágio terminaria em " + dataNova.toLocaleDateString() + " para este aluno de " + tipoDeAluno;
                 }            
-                document.getElementById("dataIni").innerHTML = "Esse Estágio terminaria em " + dataNova.toLocaleDateString() + " para este aluno de " + tipoDeAluno;
+                
             }
                               
         }   
-        
     </script>
 </body>
 </html>

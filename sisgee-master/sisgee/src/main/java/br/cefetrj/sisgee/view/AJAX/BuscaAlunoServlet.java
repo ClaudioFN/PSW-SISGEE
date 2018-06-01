@@ -47,9 +47,10 @@ public class BuscaAlunoServlet extends HttpServlet {
 		Aluno aluno = AlunoServices.buscarAlunoByMatricula(matricula.trim());
 		if(aluno != null) {
 			Pessoa pessoa = aluno.getPessoa();
-			Curso curso = aluno.getCurso();
+			Curso curso   = aluno.getCurso();
 			Campus campus = curso.getCampus();
-			
+			tipoAluno     = aluno.getTipoAluno();
+                        
 			idAluno = Integer.toString(aluno.getIdAluno());
 			nome = pessoa.getNome();
 			nomeCurso = curso.getNomeCurso();

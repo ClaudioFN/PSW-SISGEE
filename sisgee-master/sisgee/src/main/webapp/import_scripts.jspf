@@ -178,7 +178,7 @@
                             $("#numeroConvenio").val(result.numeroConvenio);
                             $("#razaoSocial").val(result.razaoSocial);
                             $("#tipoConvenio").val(result.tipoConvenio);
-                            $("#agenteSim").val(result.agenteSim);
+                            $("#isAgenteIntegracao").val(result.isAgenteIntegracao);
                             $("#cnpjEcpf").val(result.cnpjEcpf);
                             $("#nomeEmpresaPessoa").val(result.nomeEmpresaPessoa);  
                             $("#nomeConvenio").val(result.nomeEmpresaPessoa);
@@ -188,6 +188,7 @@
                             $(".razaoSocial").val("");
                             $(".tipoConvenio").val("");
                             $(".isAgenteIntegracao").val("");
+                            $("#nomeAgenciada").val("");
                             $(".cnpjEcpf").val("");
                             $(".nomeEmpresaPessoa").val("");  
                             $(".nomeConvenio").val("");
@@ -231,8 +232,7 @@
                             $("#numeroConvenio").val(result.numeroConvenio);
                             $("#razaoSocial").val(result.razaoSocial);
                             $("#tipoConvenio").val(result.tipoConvenio);
-                            $("#agenteSim").val(result.isAgenteIntegracao1);
-                            $("#agenteNao").val(result.isAgenteIntegracao2);
+                            $("#isAgenteIntegracao").val(result.isAgenteIntegracao);
                             $("#cnpjEcpf").val(result.cnpjEcpf);
                             $("#nomeEmpresaPessoa").val(result.nomeEmpresaPessoa);  
                             $("#nomeConvenio").val(result.nomeEmpresaPessoa);
