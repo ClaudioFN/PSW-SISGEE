@@ -186,15 +186,15 @@
                         else{
                             $(".numeroConvenio").val("");
                             $(".razaoSocial").val("");
-                            $(".tipoConvenio").val("");
-                            $(".isAgenteIntegracao").val("");
+                            $("#tipoConvenio").val("");
+                            $("#isAgenteIntegracao").val("");
                             $("#nomeAgenciada").val("");
                             $(".cnpjEcpf").val("");
                             $(".nomeEmpresaPessoa").val("");  
                             $(".nomeConvenio").val("");
                             
-                            $("#myModalLabel").html("Convenio não encontrado");
-                            $(".modal-body").html("O Convenio não corresponde a um Convenio cadastrado.");	        	
+                            $("#myModalLabel").html("Convênio não encontrado");
+                            $(".modal-body").html("O Convênio não corresponde a um Convênio cadastrado.");	        	
                             $('#myModal').modal('show');	        	
                         }
 	            }
@@ -240,15 +240,15 @@
                         else{
                             $(".numeroConvenio").val("");
                             $(".razaoSocial").val("");
-                            $(".tipoConvenio").val("");
-                            $(".isAgenteIntegracao").val("");
+                            $("#tipoConvenio").val("");
+                            $("#isAgenteIntegracao").val("");
                             $("#nomeAgenciada").val("");
                             $(".cnpjEcpf").val("");
                             $(".nomeEmpresaPessoa").val("");  
                             $(".nomeConvenio").val("");
                             
-                            $("#myModalLabel").html("Convenio não encontrado");
-                            $(".modal-body").html("O Convenio não corresponde a um Convenio cadastrado.");	        	
+                            $("#myModalLabel").html("Convênio não encontrado");
+                            $(".modal-body").html("O Convênio não corresponde a um Convênio cadastrado.");	        	
                             $('#myModal').modal('show');	        	
                         }
 	            }

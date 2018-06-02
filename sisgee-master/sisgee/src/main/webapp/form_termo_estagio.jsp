@@ -81,9 +81,9 @@
                 <!-- AQUI VEM O CONVÊNIO-->
                 <fieldset class="form-group" ${ not empty termoEstagio ? 'disabled' : '' }>
                     <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.resources.form.dadosEmpresaConveniada"/></legend>
-                    <div class="form-group col-md-10">
+                    <div class="form-group col-md-12">
                         <!-- AQUI VEM O NOME E NUMERO DO CONVÊNIO-->
-                      <div class="form-row">  
+                      <div class="input-group">  
                             <div class="form-group col-md-5">
                                 <label for="numeroConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.numeroConvenio"/></label>
                                     <div class="input-group">
@@ -112,54 +112,34 @@
                              </div>
                     </div>   
                     <!-- AQUI TERMINA O NOME E NUMERO DO CONVÊNIO-->
-                    
                     <div class="form-group">
-                        <div class="form-row">
-                            <div class="custom-controls-stacked d-block my-3">
-                            <label><fmt:message key = "br.cefetrj.sisgee.resources.form.tipoPJ_PF"/></label>                                
-                                <label class="custom-control custom-radio">
-                                    <input id="pj" class="custom-control-input" type="radio" name="tipoConvenio" value="pj" ${ param.tipoConvenio == 'pj' ? 'checked' : '' } disabled> 
-                                    <span class="custom-control-indicator"></span> 
-                                    <span class="custom-control-description" ><fmt:message key = "br.cefetrj.sisgee.resources.form.pj"/></span>
-                                </label>						
-
-                                <label class="custom-control custom-radio">
-                                    <input id="pf" class="custom-control-input" type="radio" name="tipoConvenio" value="pf" ${ param.tipoConvenio == 'pf' ? 'checked' : '' } disabled> 
-                                    <span class="custom-control-indicator"></span> 
-                                    <span class="custom-control-description"><fmt:message key = "br.cefetrj.sisgee.resources.form.pf"/></span>
-                                </label>                
-                            </div>
-                                
+                        <div class="input-group">
+                            <!--<div class="form-group my-3"> -->
+                                <label><fmt:message key = "br.cefetrj.sisgee.resources.form.tipoPJ_PF"/></label>                                
+                                <label class="custom-control">
+                                    <input id="tipoConvenio" class="form-control tipoConvenio" type="text" name="tipoConvenio" value="${param.tipoConvenio}" readonly> 
+                                </label>						              
+                            <!--</div>-->
                             <!-- AQUI SELECIONA AGENTE DE INTEGRACAO-->
-                             <div class="form-group">  
-                                 <div class="form-group d-block my-3">
-                                     <label for="isAgenteIntegracao"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_agente_integracao"/></label>
-                                     <label class="custom-control custom-radio">
-                                         
-                                         <input id="agenteSim" class="custom-control-input" type="radio" name="isAgenteIntegracao" <c:set var="variavel2" value="checked" scope="page"/> value="true"> 
-                                         <span class="custom-control-indicator"></span> 
-                                         <span class="custom-control-description" ><fmt:message key = "br.cefetrj.sisgee.resources.form.sim"/></span><!-- AQUI SELECIONA SIM PARA AGENTE DE INTEGRACAO-->
-                                     </label>						
-
-                                     <label class="custom-control custom-radio">
-                                         <input id="agenteNao" class="custom-control-input" type="radio" name="isAgenteIntegracao" <%=pageContext.getAttribute("variavel2")%> value="false"> 
-                                         <span class="custom-control-indicator"></span> 
-                                         <span class="custom-control-description"><fmt:message key = "br.cefetrj.sisgee.resources.form.nao"/></span><!-- AQUI SELECIONA NAO PARA AGENTE DE INTEGRACAO-->
-                                     </label>
-                                 </div>		
-                             </div>                                     
-                             <!-- AQUI TERMINA SELECIONA AGENTE DE INTEGRACAO-->                            
-                                        
-                                <div class="form-group d-block my-3">
-                                    <input type="hidden" class="form-control nomeAgenciada nomeAgenciada"  id="nomeAgenciada1" name="nomeAgenciada1" value="${ param.nomeAgenciada}">  
-                                    <label for="nomeAgenciada"><fmt:message key = "br.cefetrj.sisgee.resources.form.nomeAgenciada"/></label>
+                            <!--<div class="form-group my-3">-->
+                                <label for="isAgenteIntegracao"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_agente_integracao"/></label>
+                                <label class="custom-control">
+                                    <input id="isAgenteIntegracao" class="form-control isAgenteIntegracao" type="text" name="isAgenteIntegracao" value="${param.isAgenteIntegracao}" readonly> 
+                                </label>						
+                            <!--</div>	-->	
+                            <!-- AQUI TERMINA SELECIONA AGENTE DE INTEGRACAO-->                            
+                            <!--<div class="form-group my-3">-->
+                                <input type="hidden" class="form-control nomeAgenciada nomeAgenciada"  id="nomeAgenciada1" name="nomeAgenciada1" value="${ param.nomeAgenciada}">  
+                                <label for="nomeAgenciada"><fmt:message key = "br.cefetrj.sisgee.resources.form.nomeAgenciada"/></label>
+                                <label class="custom-control">
                                     <input type="text" class="form-control ${ not empty agenciadaMsg ? 'is-invalid': 'is-valid' } nomeAgenciada" id="nomeAgenciada"  name="nomeAgenciada" value="${ param.nomeAgenciada }" maxlength="20">
-                                    <c:if test="${ not empty agenciadaMsg }">
-                                        <div class="invalid-feedback">${ agenciadaMsg }</div>
-                                    </c:if>  
-                                </div>                                   
+                                </label>
+                                <c:if test="${ not empty agenciadaMsg }">
+                                    <div class="invalid-feedback">${ agenciadaMsg }</div>
+                                </c:if>  
+                            <!--</div> -->
                           </div>
-                      </div>               
+                      </div> 
                     </div>                      
                             
                     <!-- AQUI COMECA EMPRESA-->
@@ -427,11 +407,11 @@
             var dataNova = new Date(mes + "-" + dia + "-" + ano);
 
             if(tipoDeAluno != null || tipoDeAluno != ""){            
-                if (tipoDeAluno == 'TECNICO') {
+                if (tipoDeAluno.toString().toUpperCase() == 'TECNICO') {
                     dataNova.setMonth(dataNova.getMonth() + 6);
                     tipoDeAluno = "Curso Técnico";
                     document.getElementById("dataIni").innerHTML = "Esse Estágio terminaria em " + dataNova.toLocaleDateString() + " para este aluno de " + tipoDeAluno;
-                }else if(tipoDeAluno == 'GRADUACAO'){
+                }else if(tipoDeAluno.toString().toUpperCase() == 'GRADUACAO'){
                     dataNova.setMonth(dataNova.getMonth() + 12);
                     tipoDeAluno = "Graduação";
                     document.getElementById("dataIni").innerHTML = "Esse Estágio terminaria em " + dataNova.toLocaleDateString() + " para este aluno de " + tipoDeAluno;

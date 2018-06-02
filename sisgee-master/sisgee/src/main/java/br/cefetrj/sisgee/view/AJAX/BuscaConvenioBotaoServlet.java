@@ -42,7 +42,7 @@ public class BuscaConvenioBotaoServlet extends HttpServlet {
         Pessoa pessoaNome = null;
         
         //boolean agenteIntegracao = false;
-        String agenteIntegracao = "checked";
+        String agenteIntegracao = "NÃO";
         String CPF = "", CNPJ = "";
         
         Convenio convenio = null;
@@ -55,14 +55,13 @@ public class BuscaConvenioBotaoServlet extends HttpServlet {
          * Buscar pelo numero do Convenio
          */
         if (numeroConvenio != null) {
-            System.out.println("CHEGOU NO BUSCACONVENIOSERVLET AJAX por numeroConvenio");
             convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numeroConvenio.trim());
             if (convenio != null) {
                 empresaNome = convenio.getEmpresa();
                 if(empresaNome != null){
                     CNPJ = formatString(empresaNome.getCnpjEmpresa(),"##.###.###/####-##");
                     if (empresaNome.isAgenteIntegracao()) {
-                        agenteIntegracao = "checked";
+                        agenteIntegracao = "SIM";
                     }
                 }
 
@@ -86,7 +85,7 @@ public class BuscaConvenioBotaoServlet extends HttpServlet {
                 if(empresaNome != null){
                     CNPJ = formatString(empresaNome.getCnpjEmpresa(),"##.###.###/####-##");
                     if (empresaNome.isAgenteIntegracao()) {
-                        agenteIntegracao = "checked";
+                        agenteIntegracao = "SIM";
                     }
                 }
 
@@ -98,12 +97,11 @@ public class BuscaConvenioBotaoServlet extends HttpServlet {
             }
         }
 
-        System.out.println("agente de integracao ->" + agenteIntegracao);
        //JSON
         if(empresaNome != null){
             JsonObject model = Json.createObjectBuilder()
                     .add("razaoSocial", empresaNome.getRazaoSocial())
-                    .add("tipoConvenio", "pj")
+                    .add("tipoConvenio", "Pessoa Jurídica")
                     .add("isAgenteIntegracao", agenteIntegracao)
                     .add("cnpjEcpf", CNPJ)
                     .add("nomeEmpresaPessoa", empresaNome.getRazaoSocial())
@@ -122,8 +120,8 @@ public class BuscaConvenioBotaoServlet extends HttpServlet {
         }else if(pessoaNome != null){
             JsonObject model = Json.createObjectBuilder()
                     .add("razaoSocial", pessoaNome.getNome())
-                    .add("tipoConvenio", "pf")
-                    .add("isAgenteIntegracao", agenteIntegracao)
+                    .add("tipoConvenio", "Pessoa Física")
+                    .add("isAgenteIntegracao", "NÃO")
                     .add("cnpjEcpf", CPF)
                     .add("nomeEmpresaPessoa", pessoaNome.getNome())
                     .add("nomeConvenio", pessoaNome.getNome())
@@ -141,6 +139,8 @@ public class BuscaConvenioBotaoServlet extends HttpServlet {
         }else{
             JsonObject model = Json.createObjectBuilder()
                     .add("razaoSocial", "")
+                    .add("tipoConvenio", "")
+                    .add("isAgenteIntegracao", "")                    
                     .add("nomeAgenciada", "")
                     .build();  
             
