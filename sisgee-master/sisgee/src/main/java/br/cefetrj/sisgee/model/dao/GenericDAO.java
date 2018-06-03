@@ -33,7 +33,6 @@ public class GenericDAO<T> {
 	}
 	
 	public void incluir(T entidade){
-                System.out.println("ENTROU NO INCLUIR DO GENERIC DAO");
 		manager.persist(entidade);
 	}
 	

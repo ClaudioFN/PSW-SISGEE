@@ -86,11 +86,9 @@ public class ConvenioServices {
     public static Convenio buscarConvenioByNumeroConvenio(String numero) {
         ConvenioDAO convenioDao = new ConvenioDAO();
         try {
-            System.out.println("ENTROU NO BUSCARCOONVENIO DO SERVICE ");
             Convenio a = convenioDao.buscarByNumero(numero);
             return a;
         } catch (Exception e) {
-            System.out.println("Exception do buscarConvenioByNumeroConvenio " + e);
             return null;
         }
     }

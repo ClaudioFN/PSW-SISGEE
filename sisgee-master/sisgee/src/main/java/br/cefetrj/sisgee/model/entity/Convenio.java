@@ -53,7 +53,6 @@ public class Convenio implements Serializable {
     public Convenio() {
     }
 
-    //construtor so com numero
     public Convenio(String numeroConvenio) {
         this.numeroConvenio = numeroConvenio;
     }     

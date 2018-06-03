@@ -21,7 +21,6 @@ public class ConvenioDAO extends GenericDAO<Convenio> {
         
         
         public Convenio buscarByNumero(String numeroConvenio){
-            System.out.println("ENTROU BUSCAR NUMERO CONVENIO DAO");
 		return (Convenio) manager.createQuery(
 		    "SELECT a FROM Convenio a WHERE a.numero LIKE :numeroConvenio")
 		    .setParameter("numeroConvenio", numeroConvenio)

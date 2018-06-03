@@ -95,7 +95,6 @@ public class FormTermoEstagioServlet extends HttpServlet {
 		String msg = "";
 		String campo = "";
 		Integer tamanho = 0;		
-		System.out.println("numeroConvenio " + numeroConvenio + " e nomeConvenio " + nomeConvenio);
 		/**
 		 * Validação da Data de início do estágio usando os métodos da Classe ValidaUtils
 		 * Campo obrigatório
@@ -235,15 +234,7 @@ public class FormTermoEstagioServlet extends HttpServlet {
 			valorBolsaMsg = ValidaUtils.validaFloat(campo, valorBolsa);
 			if (valorBolsaMsg.trim().isEmpty()) {
 				Float valor = Float.parseFloat(valorBolsa);
-				request.setAttribute("valor", valor);
-				/*NumberFormat nf = NumberFormat.getInstance(new Locale("pt", "BR"));
-				Number n;
-				float valor = 0;
-				try {
-					n = nf.parse(valorBolsa);
-					valor = n.floatValue();
-				} catch (ParseException e) {
-				}*/				
+				request.setAttribute("valor", valor);			
 			} else {
 				valorBolsaMsg = messages.getString(valorBolsaMsg);
 				request.setAttribute("valorBolsaMsg", valorBolsaMsg);
@@ -491,90 +482,65 @@ public class FormTermoEstagioServlet extends HttpServlet {
 				
 		/**
 		 * Validação do nome do supervisor do TermoEstagio usando métodos da Classe ValidaUtils.
-		 * Campo opicional e tamanho máximo de 100 caracteres.
+		 * Campo opicional e tamanho máximo de 80 caracteres.
 		 */
 		String nomeSupervisorMsg = "";
 		campo = "NomeSupervisor";
-		tamanho = 100;
-		//bairroEnderecoMsg = ValidaUtils.validaObrigatorio(campo, nomeSupervisor);
-		//if(bairroEnderecoMsg.trim().isEmpty()) {
-			nomeSupervisorMsg = ValidaUtils.validaTamanho(campo, tamanho, nomeSupervisor);
-			if(nomeSupervisorMsg.trim().isEmpty()) {
-				request.setAttribute("nomeSupervisor", nomeSupervisor);
-			}else {				
-				nomeSupervisorMsg = messages.getString(nomeSupervisorMsg);
-				nomeSupervisorMsg = ServletUtils.mensagemFormatada(nomeSupervisorMsg, locale, tamanho);
-				request.setAttribute("nomeSupervisorMsg", nomeSupervisorMsg);
-				isValid = false;
-				//TODO Fazer log
-				System.out.println(nomeSupervisorMsg);
-			}
-		//}else {
-		//	nomeSupervisorMsg = messages.getString(nomeSupervisorMsg);
-		//	request.setAttribute("nomeSupervisorMsg", nomeSupervisorMsg);
-		//	isValid = false;
-		//	//TODO Fazer log
-		//	System.out.println(nomeSupervisorMsg);
-		//}
-                
+		tamanho = 80;
+
+                nomeSupervisorMsg = ValidaUtils.validaTamanho(campo, tamanho, nomeSupervisor);
+                if(nomeSupervisorMsg.trim().isEmpty()) {
+                        request.setAttribute("nomeSupervisor", nomeSupervisor);
+                }else {				
+                        nomeSupervisorMsg = messages.getString(nomeSupervisorMsg);
+                        nomeSupervisorMsg = ServletUtils.mensagemFormatada(nomeSupervisorMsg, locale, tamanho);
+                        request.setAttribute("nomeSupervisorMsg", nomeSupervisorMsg);
+                        isValid = false;
+                        //TODO Fazer log
+                        System.out.println(nomeSupervisorMsg);
+                }
+
                 
 		/**
 		 * Validação do cargo do supervisor do TermoEstagio usando métodos da Classe ValidaUtils.
-		 * Campo opicional e tamanho máximo de 100 caracteres.
+		 * Campo opicional e tamanho máximo de 80 caracteres.
 		 */
 		String cargoSupervisorMsg = "";
 		campo = "CargoSupervisor";
-		tamanho = 100;
-		//bairroEnderecoMsg = ValidaUtils.validaObrigatorio(campo, nomeSupervisor);
-		//if(bairroEnderecoMsg.trim().isEmpty()) {
-			cargoSupervisorMsg = ValidaUtils.validaTamanho(campo, tamanho, cargoSupervisor);
-			if(cargoSupervisorMsg.trim().isEmpty()) {
-				request.setAttribute("cargoSupervisor", cargoSupervisor);
-			}else {				
-				cargoSupervisorMsg = messages.getString(cargoSupervisorMsg);
-				cargoSupervisorMsg = ServletUtils.mensagemFormatada(cargoSupervisorMsg, locale, tamanho);
-				request.setAttribute("cargoSupervisorMsg", cargoSupervisorMsg);
-				isValid = false;
-				//TODO Fazer log
-				System.out.println(cargoSupervisorMsg);
-			}
-		//}else {
-		//	nomeSupervisorMsg = messages.getString(nomeSupervisorMsg);
-		//	request.setAttribute("nomeSupervisorMsg", nomeSupervisorMsg);
-		//	isValid = false;
-		//	//TODO Fazer log
-		//	System.out.println(nomeSupervisorMsg);
-		//}                
-                
+		tamanho = 80;
+
+                cargoSupervisorMsg = ValidaUtils.validaTamanho(campo, tamanho, cargoSupervisor);
+                if(cargoSupervisorMsg.trim().isEmpty()) {
+                        request.setAttribute("cargoSupervisor", cargoSupervisor);
+                }else {				
+                        cargoSupervisorMsg = messages.getString(cargoSupervisorMsg);
+                        cargoSupervisorMsg = ServletUtils.mensagemFormatada(cargoSupervisorMsg, locale, tamanho);
+                        request.setAttribute("cargoSupervisorMsg", cargoSupervisorMsg);
+                        isValid = false;
+                        //TODO Fazer log
+                        System.out.println(cargoSupervisorMsg);
+                }
                 
 		/**
 		 * Validação do agenciada do TermoEstagio usando métodos da Classe ValidaUtils.
-		 * Campo obrigatorio e tamanho máximo de 20 caracteres.
+		 * Campo opicional e tamanho máximo de 20 caracteres.
 		 */
 		String agenciadaMsg = "";
 		campo = "agenciada";
 		tamanho = 20;
-		agenciadaMsg = ValidaUtils.validaObrigatorio(campo, nomeAgenciada);
-		if(agenciadaMsg.trim().isEmpty()) {
-			agenciadaMsg = ValidaUtils.validaTamanho(campo, tamanho, nomeAgenciada);
-			if(agenciadaMsg.trim().isEmpty()) {
-				request.setAttribute("nomeAgenciada", nomeAgenciada);
-			}else {				
-				agenciadaMsg = messages.getString(agenciadaMsg);
-				agenciadaMsg = ServletUtils.mensagemFormatada(agenciadaMsg, locale, tamanho);
-				request.setAttribute("nomeAgenciada", nomeAgenciada);
-				isValid = false;
-				//TODO Fazer log
-				System.out.println("agenciada " + agenciadaMsg);
-			}
-		}else {
-			agenciadaMsg = messages.getString(agenciadaMsg);
-			request.setAttribute("agenciadaMsg", agenciadaMsg);
-			isValid = false;
-			//TODO Fazer log
-			System.out.println("agenciada " + agenciadaMsg);
-		}                 
-                
+
+                agenciadaMsg = ValidaUtils.validaTamanho(campo, tamanho, nomeAgenciada);
+                if(agenciadaMsg.trim().isEmpty()) {
+                        request.setAttribute("nomeAgenciada", nomeAgenciada);
+                }else {				
+                        agenciadaMsg = messages.getString(agenciadaMsg);
+                        agenciadaMsg = ServletUtils.mensagemFormatada(agenciadaMsg, locale, tamanho);
+                        request.setAttribute("nomeAgenciada", nomeAgenciada);
+                        isValid = false;
+                        //TODO Fazer log
+                        System.out.println("agenciada " + agenciadaMsg);
+                }
+
 		/**
 		 * Validação do Id do Professor Orientador, usando métodos da Classe ValidaUtils.
 		 * Consultando a lista de Professores para validar 
@@ -658,37 +624,7 @@ public class FormTermoEstagioServlet extends HttpServlet {
 			System.out.println(idAlunoMsg);
 		}
 		
-                
-		/**
-		 * Validação do campo Tipo de Convenio Pessoa Fisica / Pessoa Jurídica, usando métodos da Classe ValidaUtils.
-		 * Deve ser campo booleano
-		 */
-		String tipoConvenioMsg = "";
-		campo = "Tipo Convenio";
-		//tipoConvenioMsg = ValidaUtils.validaObrigatorio(campo, tipoConvenio);
-		//if(tipoConvenioMsg.trim().isEmpty()) {
-                  /*      if(tipoConvenio.equals("pf")) {				
-                                request.setAttribute("tipoConvenio", tipoConvenio);
-                        } else if(tipoConvenio.equals("pj")) {
-                                request.setAttribute("tipoConvenio", tipoConvenio);
-                        }else {
-                                tipoConvenioMsg = "Valor inválido";
-                                request.setAttribute("tipoConvenioMsg", tipoConvenioMsg);
-                                isValid = false;
-                                //TODO Fazer log
-                                System.out.println(tipoConvenioMsg);
-                        }
-
-                //}else {
-                //    tipoConvenioMsg = "Error tipo convenio";
-                //    request.setAttribute("tipoConvenioMsg", tipoConvenioMsg);
-                //    isValid = false;
-                    //TODO Fazer log
-                //    System.out.println(tipoConvenioMsg);
-                //}			
-		*/
-			                
-                
+ 
 		/**
 		 * Validação do Nº de Convênio
 		 * Campo obrigatório, tamanho máximo 10
@@ -712,7 +648,6 @@ public class FormTermoEstagioServlet extends HttpServlet {
 				System.out.println(numeroConvenioMsg);
 			}
 		} else {
-                    System.out.println("NUMERO valor " + numeroConvenio + " e mensagem " + numeroConvenioMsg);
 			numeroConvenioMsg = messages.getString(numeroConvenioMsg);
 			request.setAttribute("numeroConvenioMsg", numeroConvenioMsg);
 			isValid = false;
@@ -730,7 +665,6 @@ public class FormTermoEstagioServlet extends HttpServlet {
 		tamanho = 100;
 		nomeConvenioMsg = ValidaUtils.validaObrigatorio(campo, nomeConvenio);
 		if (nomeConvenioMsg.trim().isEmpty()) {
-                    System.out.println("entrou no nome conveio");
 			nomeConvenioMsg = ValidaUtils.validaTamanho(campo, tamanho, nomeConvenio);
 			if (nomeConvenioMsg.trim().isEmpty()) {
                                 Empresa empresa = EmpresaServices.buscarEmpresaByNome(nomeConvenio.trim());
@@ -749,7 +683,6 @@ public class FormTermoEstagioServlet extends HttpServlet {
 				System.out.println(nomeConvenioMsg);
 			}
 		} else {
-                    System.out.println("entrou no nome conveio 2 com valor " + nomeConvenio + " e mensagem " + nomeConvenioMsg);
 			nomeConvenioMsg = messages.getString(nomeConvenioMsg);
 			request.setAttribute("nomeConvenioMsg", nomeConvenioMsg);
 			isValid = false;
@@ -757,88 +690,7 @@ public class FormTermoEstagioServlet extends HttpServlet {
 			System.out.println(nomeConvenioMsg);
 		}	                
                 
-		/**
-		 * Validação do idEmpresa campo obrigatório, inteiro e já existente no banco
-		 */
-		/*Empresa empresa = null;
-		String empresaMsg = "";
-		campo = "Empresa";
-		Integer idEmp;		
-		empresaMsg = ValidaUtils.validaObrigatorio(campo, idEmpresa);
-		if (empresaMsg.trim().isEmpty()) {
-			empresaMsg = ValidaUtils.validaInteger(campo, idEmpresa);
-			if (empresaMsg.trim().isEmpty()) {
-				idEmp = Integer.parseInt(idEmpresa);
-				empresa = EmpresaServices.buscarEmpresa(idEmp);
-				if(empresa != null) {
-					request.setAttribute("idEmp", idEmp);
-				}else {
-					empresaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.empresa_invalida");
-					request.setAttribute("empresaMsg", empresaMsg);
-					isValid = false;
-				}
-			} else {
-				empresaMsg = messages.getString(empresaMsg);
-				request.setAttribute("empresaMsg", empresaMsg);
-				isValid = false;
-			}
-		} else {
-			empresaMsg = messages.getString(empresaMsg);
-			request.setAttribute("empresaMsg", empresaMsg);
-			isValid = false;
-		}
 		
-		*/
-		/**
-		 * Validação do idAgenteIntegração campo obrigatório se usuário selecionou 
-		 * que Empresa Conveniada é agente de integração, inteiro e já existente no banco
-		 */
-                /*
-		request.setAttribute("isAgenteIntegracao", isAgenteIntegracao);
-		String isAgenteIntegracaoMsg = "";
-		campo = "É agente de integração";
-		isAgenteIntegracaoMsg = ValidaUtils.validaObrigatorio(campo, isAgenteIntegracao);
-		if (isAgenteIntegracaoMsg.trim().isEmpty()) {		
-			if(isAgenteIntegracao.equals("sim")) {
-				AgenteIntegracao agenteIntegracao = null;
-				String agenteIntegracaoMsg = "";
-				campo = "Agente de Integração";
-				Integer idAI;
-				agenteIntegracaoMsg = ValidaUtils.validaObrigatorio(campo, idAgenteIntegracao);
-				if (agenteIntegracaoMsg.trim().isEmpty()) {
-					agenteIntegracaoMsg = ValidaUtils.validaInteger(campo, idAgenteIntegracao);
-					if (agenteIntegracaoMsg.trim().isEmpty()) {
-						idAI = Integer.parseInt(idAgenteIntegracao);
-						agenteIntegracao = AgenteIntegracaoServices.buscarAgenteIntegracao(idAI);
-						if(agenteIntegracao != null) {
-							request.setAttribute("idAI", idAI);
-							request.setAttribute(isAgenteIntegracao, isAgenteIntegracao);
-						}else {
-							agenteIntegracaoMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.agente_integracao_invalido");
-							request.setAttribute("agenteIntegracaoMsg", agenteIntegracaoMsg);
-							isValid = false;
-						}
-					} else {
-						agenteIntegracaoMsg = messages.getString(agenteIntegracaoMsg);
-						request.setAttribute("agenteIntegracaoMsg", agenteIntegracaoMsg);
-						isValid = false;
-					}
-				} else {
-					agenteIntegracaoMsg = messages.getString(agenteIntegracaoMsg);
-					request.setAttribute("agenteIntegracaoMsg", agenteIntegracaoMsg);
-					isValid = false;
-				}
-			}
-		
-		}
-		else {
-			isAgenteIntegracaoMsg = messages.getString(isAgenteIntegracaoMsg);
-			System.out.println("msg AI: " + isAgenteIntegracaoMsg);
-			request.setAttribute("isAgenteIntegracaoMsg", isAgenteIntegracaoMsg);
-			isValid = false;
-		}
-		
-		*/
 		/**
 		 * *************************************************************************
 		 * Se aluno já possui estágio aberto, não pode cadastrar outro
