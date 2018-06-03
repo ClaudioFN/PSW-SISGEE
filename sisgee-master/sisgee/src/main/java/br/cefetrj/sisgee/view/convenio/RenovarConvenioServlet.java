@@ -29,19 +29,36 @@ public class RenovarConvenioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
         System.out.println("ENTROU NO RENOVAR CONVENIO SERVLEEEEEEET");
-        String numeroConvenio = req.getParameter("convenio");
-        System.out.println(numeroConvenio);
+        String numeroConvenio = req.getParameter("convenio").substring(0,5);
+        System.out.println("AQUI SUBSTRING--->>>>>"+numeroConvenio);
         
         Convenio convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numeroConvenio);
         
-        req.setAttribute("Renovar", convenio);
-        if(convenio.getEmpresa()==null){
-            req.setAttribute("isEmpresa", "nao");
-        }else{
-            req.setAttribute("isEmpresa", "sim");
-        }
+        System.out.println("ACHOUUU-->>>>"+convenio.getNumeroConvenio());
+
         
-        req.getRequestDispatcher("form_empresa.jsp").forward(req, resp);
+        if(convenio.getEmpresa()!=null){
+            req.setAttribute("isEmpresa", "sim");
+            if(convenio.getEmpresa().isAgenteIntegracao()){
+                req.setAttribute("simAgenteIntegracao", "sim");
+            }else{
+                req.setAttribute("naoAgenteIntegracao", "sim");
+            }
+            req.setAttribute("cnpj", convenio.getEmpresa().getCnpjEmpresa());
+            req.setAttribute("razao", convenio.getEmpresa().getRazaoSocial());
+            
+               
+        }else{
+            req.setAttribute("isPessoa", "sim");
+            req.setAttribute("cpf", convenio.getPessoa().getCpf());
+            req.setAttribute("nome", convenio.getPessoa().getNome());
+            
+        }
+        req.getSession().setAttribute("numero", numeroConvenio);
+        
+        req.setAttribute("convenioRenovar", convenio);
+  
+        req.getRequestDispatcher("form_renovar_convenio2.jsp").forward(req, resp);
         
     }
 

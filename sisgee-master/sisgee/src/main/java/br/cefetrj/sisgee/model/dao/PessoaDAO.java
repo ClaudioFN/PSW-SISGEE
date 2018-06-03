@@ -26,7 +26,7 @@ public List<Pessoa> buscarByNomeList(String nomeX){
 		return (List<Pessoa>) manager.createQuery(
 		    "SELECT e FROM Pessoa e WHERE LOWER (e.nome) LIKE LOWER (:nomeX)")
                     
-		    .setParameter("nomeX", "%"+nomeX+"%")
+		    .setParameter("nomeX", nomeX+"%")
 		    .getResultList();
 	}
     

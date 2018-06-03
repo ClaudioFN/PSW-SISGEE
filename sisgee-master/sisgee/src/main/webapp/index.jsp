@@ -20,6 +20,11 @@
                         <h2>${ msg }</h2>
                     </div>
                 </c:when>
+                    <c:when test="${ not empty erroBuscar }">
+                    <div class="alert alert-danger" role="alert">
+                        <h2>${ erroBuscar }</h2>
+                    </div>
+                </c:when>
                 <c:otherwise>
 
                 </c:otherwise>
@@ -42,18 +47,18 @@
 
             <div class="carousel-item">
 
-                <img  src="http://eurotechclayroofing.com/wp-content/uploads/2017/07/clay-roof-ft-euro-tech-construction-1700x600.jpg" class="img-fluid d-block" alt="Chicago">
+                <img  src="imgs/carousel2.jpeg" class="img-fluid d-block" alt="Sisgee">
                 <div class="carousel-caption" style="background-color: #000; border-radius: 10px; padding: 5px;">
-                    <h3 >Faça um convênio conosco!</h3>
-                    <p >Se você é uma empresa ou pessoa física e precisa de um estagiário, faça um convênio com o CEFET/RJ!</p>
+                    <h3 ><fmt:message key="br.cefetrj.sisgee.index.carousel1" /></h3>
+                    <p ><fmt:message key="br.cefetrj.sisgee.index.carousel1.a" /></p>
                 </div>
             </div>
 
             <div class="carousel-item active">
-                <img  src="http://www.mkateam.com/wp-content/uploads/2016/10/photo-1429051883746-afd9d56fbdaf-1700x600.jpeg" class="img-fluid d-block" alt="New York">
+                <img  src="imgs/carousel1.jpg" class="img-fluid d-block" alt="Convênio">
                 <div class="carousel-caption" style="background-color: #000; border-radius: 10px; padding: 5px;">
-                    <h3>SISGEE</h3>
-                    <p>Sistema de Gerenciamento de Estágio</p>
+                    <h3><fmt:message key="br.cefetrj.sisgee.index.carousel2" /></h3>
+                    <p><fmt:message key="br.cefetrj.sisgee.index.carousel2.a" /></p>
                 </div>
             </div>
         </div>
@@ -78,22 +83,19 @@
         <!-- Three columns of text below the carousel -->
         <div class="row">
           <div class="col-lg-4">
-            <img class="rounded-circle" src="https://www.cieers.org.br/resources/img/pages/aprendiz-legal.png" alt="Generic placeholder image" width="140" height="140">
+            <img class="rounded-circle" src="https://www.cieers.org.br/resources/img/pages/aprendiz-legal.png" alt="Generic placeholder image" width="140" height="100">
             <h2>Aprendiz Legal</h2>
-            <p>O Aprendiz Legal é um programa voltado para a preparação e inserção de jovens no mundo do trabalho, que se apoia na Lei da Aprendizagem (10.097/2000).</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Ver mais &raquo;</a></p>
+            <p><fmt:message key="br.cefetrj.sisgee.index.programas1" /></p>
           </div><!-- /.col-lg-4 -->
           <div class="col-lg-4">
             <img class="rounded-circle" src="https://editalconcursosbrasil.com.br/wp-content/uploads/2016/08/estagio-ciee-1.png" alt="Generic placeholder image" width="140" height="140">
             <h2>CIEE</h2>
-            <p>Portal que trata da integração de estagiários ao mercado de trabalho - Centro de Integração Empresa Escola.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Ver mais &raquo;</a></p>
+            <p><fmt:message key="br.cefetrj.sisgee.index.programas2" /></p>
           </div><!-- /.col-lg-4 -->
           <div class="col-lg-4">
             <img class="rounded-circle" src="http://www.mudes.org.br/Imagens/logo.png" alt="Generic placeholder image" width="140" height="140">
             <h2>Mudes</h2>
-            <p>Diversas vagas de jovem aprendiz, estágio e trainee gratuitas, preencha seu curriculo e se candidate a vaga dos seus sonhos.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Ver mais &raquo;</a></p>
+            <p><fmt:message key="br.cefetrj.sisgee.index.programas3" /></p>
           </div><!-- /.col-lg-4 -->
         </div><!-- /.row -->
 

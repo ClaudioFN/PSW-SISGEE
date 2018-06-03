@@ -21,11 +21,14 @@ public class ConvenioDAO extends GenericDAO<Convenio> {
         
         
         public Convenio buscarByNumero(String numeroConvenio){
+            System.out.println("ENTROU BUSCAR NUMERO CONVENIO DAO");
 		return (Convenio) manager.createQuery(
 		    "SELECT a FROM Convenio a WHERE a.numero LIKE :numeroConvenio")
 		    .setParameter("numeroConvenio", numeroConvenio)
 		    .getSingleResult();
 	}
+        
+       
         
         
         public Convenio buscarByEmpresa(Empresa emp){
@@ -41,4 +44,6 @@ public class ConvenioDAO extends GenericDAO<Convenio> {
 		    .setParameter("pess", pess)
 		    .getSingleResult();
 	}
+        
+        
 }

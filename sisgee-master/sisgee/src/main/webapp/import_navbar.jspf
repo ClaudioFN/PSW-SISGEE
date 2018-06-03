@@ -45,9 +45,7 @@
                         <a class="dropdown-item" href="form_termo_aditivo.jsp">
                             <fmt:message key = "br.cefetrj.sisgee.resources.form.registroAditivo"/>
                         </a> 
-                        <a class="dropdown-item" href="FormTermoRescisaoServlet"> 
-                            <fmt:message key = "br.cefetrj.sisgee.resources.form.registroRescisao"/>
-                        </a>
+                        
                     </div>
                 </li>
 
@@ -71,10 +69,7 @@
             </ul>
             
                         
-            <form class="form-inline mt-2 mt-md-0">
-                <input class="form-control mr-sm-2 outline-dark" type="search" placeholder="Buscar.." aria-label="Buscar">
-                <button class="btn btn-dark mr-5 my-2 my-sm-0" type="submit"> <i class="fas fa-search"></i> Buscar</button>
-            </form>           
+                      
             <!--  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">  -->
             <c:choose>
                 <c:when test="${ lang eq 'en_US' }">

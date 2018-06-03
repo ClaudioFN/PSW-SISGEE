@@ -17,14 +17,7 @@
     <body>
         <%@include file="import_navbar.jspf"%>
 
-        <%
-           
-            ConvenioServices.listarConvenios();
-            
        
-
-
-        %>
 
         <table id="myTable" class="table table-info table-bordered container table-hover table-striped " >
             <thead>
@@ -42,22 +35,24 @@
             </thead>
 
 
-            <tr>
+            <c:forEach items="${ ConvenioServices.listarConveniosVencer()}" var="b" >
+                <tr>
 
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>${filtro.telefone}</td>
-                <td>${filtro.pessoacontato}</td>
+                    <td>${not empty b.dataAssinatura ? b.dataAssinatura : null } a ${b.getDataFinal()}</td>
+                    <td>${not empty b.numeroConvenio ? b.numeroConvenio : null }</td>
+                    <td>${not empty b.empresa ? b.empresa.razaoSocial: b.pessoa.nome } </td>
+                    <td>${not empty b.empresa ? b.empresa.cnpjEmpresa : b.pessoa.cpf }</td>
+                    <td>${not empty b.empresa ? b.empresa.emailEmpresa: b.pessoa.email } </td>
+                    <td>${not empty b.empresa ? b.empresa.telefoneEmpresa : b.pessoa.telefone }</td>
+                    <td>${not empty b.empresa ? b.empresa.contatoEmpresa : null}</td>
 
 
-            </tr>
-              
+                </tr>
+            </c:forEach>
+
         </table>
 
-        <button type="button" onclick="javascript:location.href = 'index.jsp'" class="btn btn-primary offset-lg-5">Voltar</button>
+        <button type="button" onclick="javascript:location.href = 'index.jsp'" class="btn btn-primary offset-lg-5 mb-5 mt-5">Voltar</button>
 
         <%@include file="import_footer.jspf"%>
         <%@include file="import_finalbodyscripts.jspf"%>

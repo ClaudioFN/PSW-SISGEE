@@ -46,19 +46,17 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
         String cnpjEmpresa = request.getParameter("cnpjEmpresa");
         String nomeEmpresa = request.getParameter("nomeEmpresa");
         String agenteIntegracao = request.getParameter("agenteIntegracao");
-        System.out.println(cnpjEmpresa);
-        System.out.println(nomeEmpresa);
-        System.out.println("----------->>>>"+agenteIntegracao);
+       
        
         
         String dataAssinaturaConvenioEmpresa = request.getParameter("dataAssinaturaConvenioEmpresa");
         
-        //System.out.println(dataAssinaturaConvenioEmpresa.substring(6, dataAssinaturaConvenioEmpresa.length()));
         
         String dataAssinaturaConvenioPessoa = request.getParameter("dataAssinaturaConvenioPessoa");
         String emailEmpresa = request.getParameter("emailEmpresa");
         String telefoneEmpresa = request.getParameter("telefoneEmpresa");
         String contatoEmpresa = request.getParameter("contatoEmpresa");
+        
 
         String cpfPessoa = request.getParameter("cpfPessoa");
         String nomePessoa = request.getParameter("nomePessoa");
@@ -277,14 +275,14 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
                     }
                 } else {
                     dataAssinaturaMsg = messages.getString(dataAssinaturaMsg);
-                    request.setAttribute("dataAssinaturaMsg", dataAssinaturaMsg);
+                    request.setAttribute("dataAssinaturaEmpresaMsg", dataAssinaturaMsg);
                     isValid = false;
                     //TODO Fazer log
                     System.out.println(dataAssinaturaMsg);
                 }
             } else {
                 dataAssinaturaMsg = messages.getString(dataAssinaturaMsg);
-                request.setAttribute("dataAssinaturaMsg", dataAssinaturaMsg);
+                request.setAttribute("dataAssinaturaEmpresaMsg", dataAssinaturaMsg);
                 isValid = false;
                 //TODO Fazer log
                 System.out.println(dataAssinaturaMsg);
@@ -427,14 +425,14 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
                     }
                 } else {
                     dataAssinaturaMsg = messages.getString(dataAssinaturaMsg);
-                    request.setAttribute("dataAssinaturaMsg", dataAssinaturaMsg);
+                    request.setAttribute("dataAssinaturaPessoaMsg", dataAssinaturaMsg);
                     isValid = false;
                     //TODO Fazer log
                     System.out.println(dataAssinaturaMsg);
                 }
             } else {
                 dataAssinaturaMsg = messages.getString(dataAssinaturaMsg);
-                request.setAttribute("dataAssinaturaMsg", dataAssinaturaMsg);
+                request.setAttribute("dataAssinaturaPessoaMsg", dataAssinaturaMsg);
                 isValid = false;
                 //TODO Fazer log
                 System.out.println(dataAssinaturaMsg);
@@ -447,10 +445,12 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
          * inclusão ou devolver para o formulário com as mensagens.
          */
         if (isValid) {
-            request.getRequestDispatcher("/IncluirCadastroEmpresaServlet").forward(request, response);
+                request.getRequestDispatcher("/IncluirCadastroEmpresaServlet").forward(request, response);
+           
         } else {
             String msg = messages.getString("br.cefetrj.sisgee.valida_cadastro_empresa_servlet.msg_atencao");
             request.setAttribute("msg", msg);
+            
             request.getRequestDispatcher("/form_empresa.jsp").forward(request, response);
 
         }

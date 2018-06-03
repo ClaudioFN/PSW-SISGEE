@@ -39,6 +39,7 @@ public class EmpresaServices {
 	}
         
         public static Empresa buscarEmpresaByNome(String nome) {
+                System.out.println("BUSCOU A EMPRESA PELO NOME");
 		EmpresaDAO empresaDao = new EmpresaDAO();
 		try{
 			Empresa e = empresaDao.buscarByNome(nome);
@@ -52,6 +53,7 @@ public class EmpresaServices {
         
 	
 	public static List<Empresa> buscarEmpresaByNomeList(String nome) {
+                System.out.println("BUSCOU A EMPRESA PELO NOME");
 		EmpresaDAO empresaDao = new EmpresaDAO();
 		try{
 			List<Empresa> e = empresaDao.buscarByNomeList(nome);

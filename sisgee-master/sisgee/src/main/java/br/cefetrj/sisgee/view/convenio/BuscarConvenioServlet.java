@@ -36,10 +36,11 @@ public class BuscarConvenioServlet extends HttpServlet {
         String nome = "";
         String numero = "";
         request.setAttribute("filtro", null);
-        System.out.println("ENTROU AQUI");
 
         numero = request.getParameter("numeroConvenio");
+        System.out.println("->>>>>>>" + numero);
         nome = request.getParameter("razaoSocial");
+        System.out.println("->>>>>>" + nome);
 
         String idEmpresa = "";
         request.setAttribute("selecao", null);
@@ -50,69 +51,74 @@ public class BuscarConvenioServlet extends HttpServlet {
         Empresa empresa = null;
         List<Pessoa> pessoas = new ArrayList();
 
-        System.out.println("----->>>>>" + numero);
-        System.out.println("--->>>>>>" + nome);
+        boolean isValid = true;
+
         /**
          * Buscar pelo numero do Convenio
          */
-        if (!numero.equals("")) {
-            System.out.println("VAI BUSCAR PELO NUMERO DO CONVENIO");
-            convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numero.trim());
-        }
-        if (convenio != null) {
-            convenios.add(convenio);
-            System.out.println("ENVIOU ISSOO---->>>>>" + convenios);
-            System.out.println("ACHOU O CONVENIO POR NUMERO CONVENIO");
+        if (numero != null) {
+            if (!numero.equals("")) {
+                convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numero.trim());
+            } 
+            if (convenio != null) {
+                convenios.add(convenio);
 
+            }
+        }else{
+            isValid=false;
         }
 
         /**
          * Buscar pelo nome da Empresa/Pessoa
          */
-        if (!nome.equals("")) {
+        if (nome != null) {
+            if (!nome.equals("")) {
 
-            System.out.println("ENTROU AQUIIIIIIIIIIIIIIIIii");
-            pessoas = PessoaServices.buscarPessoaByNomeList(nome.trim());
+                pessoas = PessoaServices.buscarPessoaByNomeList(nome.trim());
 
-            empresas = EmpresaServices.buscarEmpresaByNomeList(nome.trim());
-            System.out.println(empresas);
+                empresas = EmpresaServices.buscarEmpresaByNomeList(nome.trim());
 
-            if (pessoas != null) {
+                if (pessoas != null) {
 
-                System.out.println("ACHOU PEssoa PELO NOME");
-                for (Pessoa x : pessoas) {
-                    convenio = ConvenioServices.buscarConvenioByPessoa(x);
-                    System.out.println("pessoa--->>" + x);
-                    System.out.println("---->>>>> CONVENIO PESSOA " + convenio);
+                    for (Pessoa x : pessoas) {
+                        convenio = ConvenioServices.buscarConvenioByPessoa(x);
+                        convenios.add(convenio);
 
-                    convenios.add(convenio);
+                    }
 
                 }
 
-            }
+                if (empresas != null) {
 
-            if (empresas != null) {
+                    for (Empresa x : empresas) {
+                        convenio = ConvenioServices.buscarConvenioByEmpresa(x);
+                        convenios.add(convenio);
 
-                System.out.println("ACHOU EMPRESAAA PELO NOME");
-                for (Empresa x : empresas) {
-                    convenio = ConvenioServices.buscarConvenioByEmpresa(x);
-                    System.out.println("empresa--->>>" + x);
-                    System.out.println("---->>>>> CONVENIO EMPRESA " + convenio);
-                    convenios.add(convenio);
+                    }
 
                 }
-
-            }
+            } 
+        }else{
+            isValid=false;
         }
-
-        if (convenios != null) {
+        
+        
+        if (!convenios.isEmpty()) {
+            isValid=true;
 
             request.setAttribute("filtro", convenios);
-            System.out.println("---------->>>>>>>>>" + convenios);
+
         }
 
-        System.out.println("AQUI QUE DESPACHA---->>>>>>>>7" + convenios);
-        request.getRequestDispatcher("form_renovar_convenio.jsp").forward(request, response);
+        if (isValid) {
+
+            request.getRequestDispatcher("form_renovar_convenio.jsp").forward(request, response);
+        } else {
+            System.out.println("ENTROU ELSE DO CONVENIOSSSSSSSS");
+            request.setAttribute("erroBuscar", "Não foi encontrado nenhum convênio com os parâmetros passados.");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+
+        }
 
     }
 

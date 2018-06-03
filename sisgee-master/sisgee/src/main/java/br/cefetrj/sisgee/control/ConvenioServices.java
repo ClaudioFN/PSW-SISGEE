@@ -8,6 +8,7 @@ import br.cefetrj.sisgee.model.dao.PersistenceManager;
 import br.cefetrj.sisgee.model.entity.Convenio;
 import br.cefetrj.sisgee.model.entity.Empresa;
 import br.cefetrj.sisgee.model.entity.Pessoa;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -34,21 +35,27 @@ public class ConvenioServices {
 
         GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);
 
-        Calendar cal = GregorianCalendar.getInstance();
+       
+
         List<Convenio> x = convenioDao.buscarTodos();
-        List<Convenio> aVencer = null;
+        List<Convenio> aVencer = new ArrayList();
         for (Convenio convenio : x) {
+            System.out.println("Convenio --->" + x);
             String dataAssinou = convenio.getDataAssinatura();
             int anoAntigo = Integer.parseInt(dataAssinou.substring(6, dataAssinou.length()));
+            System.out.println(anoAntigo);
             int mesAntigo = Integer.parseInt(dataAssinou.substring(3, 5));
+            System.out.println(mesAntigo);
 
-            
-            int anoAtual = cal.get(Calendar.YEAR);
-            int mesAtual = cal.get(Calendar.MONTH);
+            int mesAtual = Calendar.getInstance().get(Calendar.MONTH);
+            System.out.println(mesAtual);
+            int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
+            System.out.println(anoAtual);
 
             int venceu = (anoAtual - anoAntigo) * 12 + (mesAtual - mesAntigo);
             if (venceu >= 58) {
                 aVencer.add(convenio);
+                System.out.println("Entrou aqui" + convenio);
 
             }
 
@@ -86,6 +93,7 @@ public class ConvenioServices {
     public static Convenio buscarConvenioByNumeroConvenio(String numero) {
         ConvenioDAO convenioDao = new ConvenioDAO();
         try {
+            System.out.println("ENTROU NO BUSCARCOONVENIO DO SERVICE ");
             Convenio a = convenioDao.buscarByNumero(numero);
             return a;
         } catch (Exception e) {
@@ -112,4 +120,18 @@ public class ConvenioServices {
             return null;
         }
     }
+    
+    public static void alterarConvenio(Convenio convenio) {
+		
+		GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);		
+		
+		try {
+			PersistenceManager.getTransaction().begin();
+			convenioDao.alterar(convenio);
+			PersistenceManager.getTransaction().commit();
+		} catch (Exception e) {			
+			e.printStackTrace();
+			PersistenceManager.getTransaction().rollback();
+		}
+	}
 }

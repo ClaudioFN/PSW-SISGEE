@@ -53,10 +53,6 @@ public class Convenio implements Serializable {
     public Convenio() {
     }
 
-    public Convenio(String numeroConvenio) {
-        this.numeroConvenio = numeroConvenio;
-    }     
-    
     public Convenio(String ano, String numero, String dataAssinatura, Empresa empresa) {
         this.ano=ano;
         this.numero=numero;
@@ -75,6 +71,13 @@ public class Convenio implements Serializable {
 
     }
     
+    public String getDataFinal(){
+        int x = Integer.parseInt(dataAssinatura.substring(6, dataAssinatura.length()));
+        String y = String.valueOf(x + 5);
+        String z = dataAssinatura.substring(0,5) + "/" +  y;
+
+        return z;
+    }
     
 
     public String getNumero() {

@@ -28,40 +28,51 @@
 
 
 
-            <form action="BuscarConvenioServlet" method="GET" >
+            
 
 
 
 
-                <fieldset class="form-group col-10 offset-1">
+                <fieldset class="form-group col-auto offset-1">
+
+                    <form action="ValidaBuscarConvenioServlet" method="GET" >
 
 
+                        <div class="form-row mb-3 mt-3 " >
 
+                            <div class="form-inline form-group col-md-8 mt-2 offset-2" >
+                                <label for="numeroConvenio" class="mr-1"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_numeroConvenio_renovar" /></label>
+                                <input type="text" class="ml-5 form-control ${ not empty numeroConvenioMsg ? 'is-invalid': 'is-valid' }" id="numeroConvenio" name="numeroConvenio"  maxlength="5" value="">
+                                <span class="input-group-btn"> 
+                                    <button class="btn btn-primary  " type="submit" id="btnBuscarPeloNumero" ><i class="fas fa-search"></i> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_buscar"/></button>
+                                </span>
+                                <c:if test="${ not empty numeroConvenioMsg }">
+                                <div class="invalid-feedback ml-3">${ numeroConvenioMsg }</div>
+                                </c:if>
 
-                    <div class="form-row mb-3 mt-3 " >
+                            </div>
+                        </div>
+                    </form>
+                    <form action="ValidaBuscarConvenioServlet" method="GET" >
 
-                        <div class="form-inline form-group col-md-8 mt-2 offset-2" >
-                            <label for="numeroConvenio" class="mr-1"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_numeroConvenio_renovar" /></label>
-                            <input type="text" class="ml-5 form-control ${ not empty cnpjEmpresaMsg ? 'is-invalid': 'is-valid' }" id="numeroConvenio" name="numeroConvenio"  value="">
-                            <span class="input-group-btn"> 
-                                <button class="btn btn-primary" type="submit" id="btnBuscarPeloNumero" ><i class="fas fa-search"></i> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_buscar"/></button>
-                            </span>
+                        <div class="form-row mb-3 " >
+                            <div class="form-inline col-md-8 mt-2 offset-2 mb-3" >
+
+                                <label for="razaoSocial" class="mr-3"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_razaoSocial_renovar" /></label>
+                                <input type="text" class="ml-5 form-control ${ not empty nomeMsg ? 'is-invalid': 'is-valid' }" id="razaoSocial" name="razaoSocial" maxlength="100"  value="">
+                                <span class="input-group-btn"> 
+                                    <button class="btn btn-primary" type="submit" id="btnBuscarPeloNome"  ><i class="fas fa-search"></i> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_buscar"/></button>
+                                </span>
+                                <c:if test="${ not empty nomeMsg }">
+                                <div class="invalid-feedback ml-3">${ nomeMsg }</div>
+                                </c:if>
+
+                            </div>
+
 
                         </div>
-                    </div>
-                    <div class="form-row mb-3 " >
-                        <div class="form-inline col-md-8 mt-2 offset-2 mb-3" >
 
-                            <label for="razaoSocial" class="mr-3"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_razaoSocial_renovar" /></label>
-                            <input type="text" class="ml-5 form-control ${ not empty cnpjEmpresaMsg ? 'is-invalid': 'is-valid' }" id="razaoSocial" name="razaoSocial"  value="">
-                            <span class="input-group-btn"> 
-                                <button class="btn btn-primary" type="submit" id="btnBuscarPeloNome" ><i class="fas fa-search"></i> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_buscar"/></button>
-                            </span>
-
-                        </div>
-
-
-                    </div>
+                    </form>
                     <div class="offset-5 mb-3 mt-5">               
 
 
@@ -74,10 +85,10 @@
                                 <tr>
 
 
-                                    <th scope="col">Número do Convênio</th>
-                                    <th scope="col">Razão Social/Nome</th>
+                                    <th scope="col"><fmt:message key="br.cefetrj.sisgee.resources.form.numeroConvenio" /></th>
+                                    <th scope="col"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_razaoSocial_renovar" /></th>
                                     <th scope="col">CNPJ/CPF</th>
-                                    <th scope="col">Renovar</th>
+                                    <th scope="col"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_titulo_renovar" /></th>
 
                                 </tr>
                             </thead>
@@ -85,9 +96,9 @@
                                 <tr>
 
                                     <td>${not empty b.numeroConvenio ? b.numeroConvenio : null }</td>
-                                    <td>${ not empty b.empresa ? b.empresa.razaoSocial: b.pessoa.nome } </td>
+                                    <td >${ not empty b.empresa ? b.empresa.razaoSocial: b.pessoa.nome } </td>
                                     <td>${ not empty b.empresa ? b.empresa.cnpjEmpresa : b.pessoa.cpf }</td>
-                                    <td><a class="btn btn-sm btn-primary btn-block" href="RenovarConvenioServlet?convenio=${requestScope.b.numeroConvenio}" >Clique para Renovar</td>
+                                    <td><a class="btn btn-sm btn-primary btn-block" href="RenovarConvenioServlet?convenio=${b.numeroConvenio}" ><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_clique_renovar" /></td>
 
 
                                 </tr>
@@ -96,7 +107,7 @@
                     </c:if>         
                 </fieldset>
 
-            </form>
+            
 
         </div>
         <%@include file="import_footer.jspf"%>
@@ -152,7 +163,7 @@
             </div>
         </div>
 
-          -->
+        -->
 
 
 
