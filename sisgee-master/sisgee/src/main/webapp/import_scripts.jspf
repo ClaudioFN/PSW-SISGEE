@@ -18,8 +18,6 @@
             
             $('.ehAgenteCheck').change(function(){
 	    	$('.AI').hide();
-	    	$("#idEmpresa").val("");
-	    	$("#idAgenteIntegracao").val("");
 	    	$(this).val() == 'sim' ? $('.isAI').show("slow") : $('.notAI').show("slow");;
 	    });
             
