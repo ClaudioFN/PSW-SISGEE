@@ -28,7 +28,7 @@ public class EmpresaDAO extends GenericDAO<Empresa> {
 		return (Empresa) manager.createQuery(
 		    "SELECT e FROM Empresa e WHERE LOWER (e.razaoSocial) LIKE LOWER (:nomeX)")
                     
-		    .setParameter("nomeX", nomeX)
+		    .setParameter("nomeX", nomeX+"%")
 		    .getSingleResult();
 	}
 
