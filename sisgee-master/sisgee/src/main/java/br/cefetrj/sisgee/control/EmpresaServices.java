@@ -52,7 +52,6 @@ public class EmpresaServices {
         
 	
 	public static List<Empresa> buscarEmpresaByNomeList(String nome) {
-                System.out.println("BUSCOU A EMPRESA PELO NOME");
 		EmpresaDAO empresaDao = new EmpresaDAO();
 		try{
 			List<Empresa> e = empresaDao.buscarByNomeList(nome);
@@ -79,7 +78,6 @@ public class EmpresaServices {
 		GenericDAO<Empresa> empresaDao = PersistenceManager.createGenericDAO(Empresa.class);	
 		PersistenceManager.getTransaction().begin();
 		try{
-                    System.out.println("ENTROU NO SERVICE INCLUIR EMPRESASERVICE");
 			empresaDao.incluir(empresa);
 			PersistenceManager.getTransaction().commit();
 		}catch(Exception e){
