@@ -32,7 +32,6 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
 
         Locale locale = ServletUtils.getLocale(request);
         ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);

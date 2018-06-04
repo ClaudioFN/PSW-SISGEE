@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 
+
 <%@include file="import_head.jspf"%>
 
 <title>
@@ -31,43 +32,90 @@
 				<%@include file="import_busca_aluno.jspf"%>
 				<div class="container">					
 
-                                    <button id="btnListarAditivo" type="submit" class="btn btn-secondary" disabled="true"><fmt:message key = "br.cefetrj.sisgee.resources.form.listarAditivos"/></button>
+                                    <button id="btnListarAditivo" type="submit" class="btn btn-secondary"><fmt:message key = "br.cefetrj.sisgee.resources.form.listarAditivos"/></button>
 
 				</div>				
 				
 			</fieldset>
 		</form>
-		
-		<div class="container">
-		<table class = "table table">
-			
-			<thead>		
-				<tr>
-					<th><fmt:message key = "br.cefetrj.sisgee.resources.form.dataRegistro"/></th>
-					<th><fmt:message key = "br.cefetrj.sisgee.resources.form.cnpj"/></th>
-					<th><fmt:message key = "br.cefetrj.sisgee.resources.form.razaoSocial"/></th>
+                </div>
+                <div class="container">
+		<div class="table-responsive">
+                    <table class="table table-bordered table-condensend">
+				<tr>        
+                                        <th>Tipo</th>
+                                        <th>Status</th>
+                                        <th>Tipo de Aditivo</th>
+                                        <th>dataInicioTermoEstagio</th>
+                                        <th>dataFimTermoEstagio</th>
+                                        <th>dataRecisaoTermoEstagio</th>
+                                        <th>cargaHorariaTermoEstagio</th>
+                                        <th>valorBolsa</th>
+                                        <th>enderecoTermoEstagio</th>
+                                        <th>numeroEnderecoTermoEstagio</th>
+                                        <th>complementoEnderecoTermoEstagio</th>
+                                        <th>bairroEnderecoTermoEstagio</th>
+                                        <th>cepEnderecoTermoEstagio</th>
+                                        <th>cidadeEnderecoTermoEstagio</th>
+                                        <th>estadoEnderecoTermoEstagio</th>
+                                        <th>eEstagioObrigatorio</th>
+                                        <th>nomeSupervisor</th>
+                                        <th>cargoSupervisor</th>
+                                        <th>nomeAgenciada</th>
 				</tr>
-			</thead>			
-			<tbody>
-				<c:forEach items = "${termosAditivos}" var = "termoAditivo">
-						<tr>
-						<td>
-							<c:url value = "/VerTermoAditivoServlet" var = "verTermoAditivoUrl" scope = "page">
-								<c:param name="idTermoAditivo" value = "${termoAditivo.idTermoAditivo}"/>  
-							</c:url>
-						<a href = "${verTermoAditivoUrl}" >${ termoAditivo.termoEstagio.dataInicioTermoEstagio }</a></td>	
-												
-						<td> ${ termoAditivo.termoEstagio.convenio.empresa.cnpjEmpresa }</td>
-						<td> ${ termoAditivo.termoEstagio.convenio.empresa.nomeEmpresa }</td>						
-							
-						</tr>
-				</c:forEach>
-			</tbody>
+						
+                                <c:forEach items="${listaTermoEstagio}" var="b">
+                                    <tr>
+                                        <td>Termo Estágio</td>
+                                        <td>Ativo</td>
+                                        <td>--</td>
+                                        <td>${b.dataInicioTermoEstagio}</td>
+                                        <td>${b.dataFimTermoEstagio}</td>
+                                        <td>--</td>
+                                        <td>${b.cargaHorariaTermoEstagio}</td>
+                                        <td>${b.valorBolsa}</td>
+                                        <td>${b.enderecoTermoEstagio}</td>
+                                        <td>${b.numeroEnderecoTermoEstagio}</td>
+                                        <td>${b.complementoEnderecoTermoEstagio}</td>
+                                        <td>${b.bairroEnderecoTermoEstagio}</td>
+                                        <td>${b.cepEnderecoTermoEstagio}</td>
+                                        <td>${b.cidadeEnderecoTermoEstagio}</td>
+                                        <td>${b.estadoEnderecoTermoEstagio}</td>
+                                        <td>--</td>
+                                        <td>${b.nomeSupervisor}</td>
+                                        <td>${b.cargoSupervisor}</td>
+                                        <td>${b.nomeAgenciada}</td>
+                                    </tr>
+                                    <c:forEach items="${b.getTermosAditivos()}" var="c">
+                                        <tr>
+                                            <td>Aditivo</td>
+                                            <td>--</td>
+                                            <td>Vigência</td>
+                                            <td>${c.dataCadastramentoTermoAditivo}</td>
+                                            <td>${c.dataFimTermoAditivo}</td>
+                                            <td>${c.dataFimTermoAditivo}</td>
+                                            <td>${c.cargaHorariaTermoAditivo}</td>
+                                            <td>${c.getValorBolsaTermoAditivo()}</td>
+                                            <td>${c.enderecoTermoAditivo}</td>
+                                            <td>${c.numeroEnderecoTermoAditivo}</td>
+                                            <td>${c.complementoEnderecoTermoAditivo}</td>
+                                            <td>${c.bairroEnderecoTermoAditivo}</td>
+                                            <td>${c.cepEnderecoTermoAditivo}</td>
+                                            <td>${c.cidadeEnderecoTermoAditivo}</td>
+                                            <td>${c.estadoEnderecoTermoAditivo}</td>
+                                            <td>--</td>
+                                            <td>--</td>
+                                            <td>--</td>
+                                            <td>--</td>
 
+                                         </tr>   
+                                    </c:forEach>
+                                </c:forEach>
 		</table>
 		</div>
-		
+		</div>
 			
+                <div class="container">                
 		<form action="TermoAditivoServlet" method="post">
 				
 		<br>
@@ -76,15 +124,17 @@
 				<div class="row">
 					<div class="form-check form-check-inline">
 						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" id="vigencia" name="vigencia"  value="sim"><fmt:message key = "br.cefetrj.sisgee.resources.form.vigenciaEstagio"/>
-						</label>
+							<input class="form-check-input" type="checkbox" id="vigencia" name="alvigencia"  value="sim"><fmt:message key = "br.cefetrj.sisgee.resources.form.vigenciaEstagio"/>
+                                                        <input type="hidden" name="alvigencia" value=${alvigencia}>
+                                                </label>
 					</div>
 				
 					<div class="mx-auto" style="width: 200px;">
 					<div class="form-check form-check-inline">
 						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" id="enderecoTermoEstagio" name="endereco" value="sim"><fmt:message key = "br.cefetrj.sisgee.resources.form.endereco"/>
-						</label>
+							<input class="form-check-input" type="checkbox" id="enderecoTermoEstagio" name="alendereco" value="sim"><fmt:message key = "br.cefetrj.sisgee.resources.form.endereco"/>
+                                                        <input type="hidden" name="alendereco" value=${alendereco}>
+                                                </label>
 					</div>
 					</div>
 				
@@ -95,33 +145,46 @@
 				<div class="row">
 					<div class="form-check form-check-inline">
 						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" id="cargaHorariaTermoEstagio" name="cargaHoraria" value="sim"><fmt:message key = "br.cefetrj.sisgee.resources.form.cargaHorariaAluno"/>
-						</label>
+							<input class="form-check-input" type="checkbox" id="cargaHorariaTermoEstagio" name="alcargaHoraria" value="sim"><fmt:message key = "br.cefetrj.sisgee.resources.form.cargaHorariaAluno"/>
+                                                        <input type="hidden" name="alcargaHoraria" value=${alcargaHoraria}>
+                                                </label>
 					</div>
 				
-					<div class="mx-auto" style="width: 236px;">
+					<div class="mx-auto" style="width: 200px;">
 					<div class="form-check form-check-inline">
 						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" id="professorOrientador" name="professor" value="sim"><fmt:message key = "br.cefetrj.sisgee.resources.form.professorOrientador"/>
-						</label>
+							<input class="form-check-input" type="checkbox" id="professorOrientador" name="alprofessor" value="sim"><fmt:message key = "br.cefetrj.sisgee.resources.form.professorOrientador"/>
+                                                        <input type="hidden" name="alprofessor" value=${alprofessor}>
+                                                </label>
 					</div>
 					</div>				
 				</div>
 			</div>
 			
 			<div class="mx-auto" style="width: 500px;">
+                                <div class="row">
+					<div class="form-check form-check-inline">
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" id="alsupervisor" name="alsupervisor" value="sim">Supervisor
+                                                        <input type="hidden" name="alsupervisor" value=${alsupervisor}>
+                                                </label>
+					</div>
+                                </div>
 				<div class="row">
 					<div class="form-check form-check-inline">
 						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" id="valorBolsa" name="valor" value="sim"><fmt:message key = "br.cefetrj.sisgee.resources.form.valorBolsaEstagio"/>
-						</label>
+							<input class="form-check-input" type="checkbox" id="valorBolsa" name="alvalor" value="sim"><fmt:message key = "br.cefetrj.sisgee.resources.form.valorBolsaEstagio"/>
+                                                        <input type="hidden" name="alvalor" value=${alvalor}>
+                                                </label>
 					</div>
 				</div>
+                                	
 			</div>			
 			<br>			
-			<input type="hidden" id="idAlunoAdt" name="idAlunoAdt" value="" />
-                        <input type="hidden" id="idAlunoAdt" name="idAlunoAdt" value="" />
-			<button type="submit" id="btnNovoAditivo" class="btn btn-secondary" disabled="true"><fmt:message key = "br.cefetrj.sisgee.resources.form.novo_aditivo"/></button>
+			<input type="hidden" name="idAlunoAdt" value="${param.matricula}">
+                        
+                                                                                            
+                        <button type="submit" id="btnNovoAditivo" class="btn btn-secondary" ${ empty param.nome ? 'disabled' : '' }><fmt:message key = "br.cefetrj.sisgee.resources.form.novo_aditivo"/></button>
 			<button type="button" class="btn btn-secondary"><fmt:message key = "br.cefetrj.sisgee.resources.form.cancelar"/></button>			
 		</form>
 		
@@ -141,8 +204,7 @@
 		    </div>
 		  </div>
 		</div>
-
-	</div>
+            </div>
 	<%@include file="import_footer.jspf"%>
 	<%@include file="import_finalbodyscripts.jspf"%>
         <script type="text/javascript">
