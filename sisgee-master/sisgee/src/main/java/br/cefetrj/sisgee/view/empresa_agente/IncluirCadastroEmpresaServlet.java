@@ -22,6 +22,8 @@ import br.cefetrj.sisgee.model.entity.Empresa;
 import br.cefetrj.sisgee.model.entity.Pessoa;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet("/IncluirCadastroEmpresaServlet")
@@ -41,8 +43,8 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
         String nomeEmpresa = request.getParameter("nomeEmpresa");
         String agenteIntegracao = request.getParameter("agenteIntegracao");
         
-        String dataAssinaturaConvenio = request.getParameter("dataAssinaturaConvenioPessoa");
-        String dataAssinaturaConvenioEmpresa = request.getParameter("dataAssinaturaConvenioEmpresa");
+        Date dataAssinaturaConvenio = (Date)request.getAttribute("dataAssinaturaConvenioPessoa");
+        Date dataAssinaturaConvenioEmpresa = (Date)request.getAttribute("dataAssinaturaConvenioEmpresa");
         
         String emailEmpresa = request.getParameter("emailEmpresa");
         String telefoneEmpresa = request.getParameter("telefoneEmpresa");
@@ -87,7 +89,7 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
 
             }
             try {
-                Convenio convenio = new Convenio(dataAssinaturaConvenioEmpresa.substring(6, dataAssinaturaConvenioEmpresa.length()),gerarNumeroConvenio(), dataAssinaturaConvenioEmpresa, empresa);
+                Convenio convenio = new Convenio(new SimpleDateFormat("yyyy").format(dataAssinaturaConvenioEmpresa),gerarNumeroConvenio(), dataAssinaturaConvenioEmpresa, empresa);
                 convenio.setNumeroConvenio();
                 ConvenioServices.incluirConvenio(convenio);
                 msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_convenio_cadastrado");
@@ -121,7 +123,8 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
 
             }
             try {
-                Convenio convenio = new Convenio(dataAssinaturaConvenio.substring(6, dataAssinaturaConvenio.length()),gerarNumeroConvenio(), dataAssinaturaConvenio, pessoa);
+                
+                Convenio convenio = new Convenio(new SimpleDateFormat("yyyy").format(dataAssinaturaConvenio),gerarNumeroConvenio(), dataAssinaturaConvenio, pessoa);
                 convenio.setNumeroConvenio();
                 
                 ConvenioServices.incluirConvenio(convenio);
@@ -143,9 +146,9 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
 
     }
     public static String gerarNumeroConvenio(){
-        int y = 10000;
+        
         List<Convenio> x = ConvenioServices.listarConvenios();
-        String a = String.valueOf(y+x.size()+1);
+        String a = String.valueOf(x.size()+1);
         return a;
     }
 
