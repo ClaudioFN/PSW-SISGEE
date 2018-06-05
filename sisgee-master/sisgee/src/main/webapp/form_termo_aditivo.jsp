@@ -8,7 +8,12 @@
 <title>
 	<fmt:message key = "br.cefetrj.sisgee.resources.form.registroTermoAditivo"/>
 </title>
+<style>
 
+    table{
+        white-space: nowrap ;
+    }
+</style>
 </head>
 <body>
 	<%@include file="import_navbar.jspf"%>
@@ -41,74 +46,36 @@
                 </div>
                 <div class="container">
 		<div class="table-responsive">
-                    <table class="table table-bordered table-condensend">
-				<tr>        
+                    <table class="table table-info table-bordered container table-hover table-striped">
+                                    <tr>
                                         <th>Tipo</th>
                                         <th>Status</th>
-                                        <th>Tipo de Aditivo</th>
-                                        <th>dataInicioTermoEstagio</th>
-                                        <th>dataFimTermoEstagio</th>
-                                        <th>dataRecisaoTermoEstagio</th>
-                                        <th>cargaHorariaTermoEstagio</th>
-                                        <th>valorBolsa</th>
-                                        <th>enderecoTermoEstagio</th>
-                                        <th>numeroEnderecoTermoEstagio</th>
-                                        <th>complementoEnderecoTermoEstagio</th>
-                                        <th>bairroEnderecoTermoEstagio</th>
-                                        <th>cepEnderecoTermoEstagio</th>
-                                        <th>cidadeEnderecoTermoEstagio</th>
-                                        <th>estadoEnderecoTermoEstagio</th>
-                                        <th>eEstagioObrigatorio</th>
-                                        <th>nomeSupervisor</th>
-                                        <th>cargoSupervisor</th>
-                                        <th>nomeAgenciada</th>
-				</tr>
+                                        <th>Data de Cadastramento</th>
+                                        <th>Vigência</th>
+                                        <th>CPF/CNPJ</th>
+                                        <th>Razão Social/Nome</th>
+                                        
+                                    </tr>
 						
                                 <c:forEach items="${listaTermoEstagio}" var="b">
                                     <tr>
                                         <td>Termo Estágio</td>
-                                        <td>Ativo</td>
                                         <td>--</td>
-                                        <td>${b.dataInicioTermoEstagio}</td>
-                                        <td>${b.dataFimTermoEstagio}</td>
-                                        <td>--</td>
-                                        <td>${b.cargaHorariaTermoEstagio}</td>
-                                        <td>${b.valorBolsa}</td>
-                                        <td>${b.enderecoTermoEstagio}</td>
-                                        <td>${b.numeroEnderecoTermoEstagio}</td>
-                                        <td>${b.complementoEnderecoTermoEstagio}</td>
-                                        <td>${b.bairroEnderecoTermoEstagio}</td>
-                                        <td>${b.cepEnderecoTermoEstagio}</td>
-                                        <td>${b.cidadeEnderecoTermoEstagio}</td>
-                                        <td>${b.estadoEnderecoTermoEstagio}</td>
-                                        <td>--</td>
-                                        <td>${b.nomeSupervisor}</td>
-                                        <td>${b.cargoSupervisor}</td>
-                                        <td>${b.nomeAgenciada}</td>
+                                        <td>${b.getDataInicioTermoEstagio2()}</td>
+                                        <td>${b.getDataFimTermoEstagio2()}</td>
+                                        <td>${b.getConvenio().pegaNome()}</td>
+                                        <td>${b.getConvenio().pegaCpf()}</td>
+                                        
                                     </tr>
                                     <c:forEach items="${b.getTermosAditivos()}" var="c">
                                         <tr>
-                                            <td>Aditivo</td>
+                                            <td>${c.getTipoAditivo()}</td>
                                             <td>--</td>
-                                            <td>Vigência</td>
-                                            <td>${c.dataCadastramentoTermoAditivo}</td>
-                                            <td>${c.dataFimTermoAditivo}</td>
-                                            <td>${c.dataFimTermoAditivo}</td>
-                                            <td>${c.cargaHorariaTermoAditivo}</td>
-                                            <td>${c.getValorBolsaTermoAditivo()}</td>
-                                            <td>${c.enderecoTermoAditivo}</td>
-                                            <td>${c.numeroEnderecoTermoAditivo}</td>
-                                            <td>${c.complementoEnderecoTermoAditivo}</td>
-                                            <td>${c.bairroEnderecoTermoAditivo}</td>
-                                            <td>${c.cepEnderecoTermoAditivo}</td>
-                                            <td>${c.cidadeEnderecoTermoAditivo}</td>
-                                            <td>${c.estadoEnderecoTermoAditivo}</td>
-                                            <td>--</td>
-                                            <td>--</td>
-                                            <td>--</td>
-                                            <td>--</td>
-
-                                         </tr>   
+                                            <td>${c.getDataCadastramentoTermoAditivo2()}</td>
+                                            <td>${c.getDataFimTermoAditivo2()}</td>
+                                            <td>${b.getConvenio().pegaNome()}</td>
+                                            <td>${b.getConvenio().pegaCpf()}</td>
+                                        </tr>   
                                     </c:forEach>
                                 </c:forEach>
 		</table>
