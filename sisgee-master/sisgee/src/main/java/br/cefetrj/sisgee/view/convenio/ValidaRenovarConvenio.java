@@ -68,7 +68,14 @@ public class ValidaRenovarConvenio extends HttpServlet {
             if (emailEmpresaMsg.trim().isEmpty()) {
                 emailEmpresaMsg = ValidaUtils.validaTamanho("emailEmpresa", 50, emailEmpresa);
                 if (emailEmpresaMsg.trim().isEmpty()) {
-                    request.setAttribute("emailEmpresa", emailEmpresa);
+                    emailEmpresaMsg = ValidaUtils.validaEmail("emailEmpresa", emailEmpresa);
+                    if (emailEmpresaMsg.trim().isEmpty()) {
+                        request.setAttribute("emailEmpresa", emailEmpresa);
+                    } else {
+                        emailEmpresaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                        request.setAttribute("emailEmpresaMsg", emailEmpresaMsg);
+                        isValid = false;
+                    }
                 } else {
                     emailEmpresaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
                     request.setAttribute("emailEmpresaMsg", emailEmpresaMsg);
@@ -92,7 +99,14 @@ public class ValidaRenovarConvenio extends HttpServlet {
                     telefoneEmpresa = telefoneEmpresa.replaceAll("[.|/|-]", "");
                     telefoneEmpresaMsg = ValidaUtils.validaInteger("telefoneEmpresa", telefoneEmpresa);
                     if (telefoneEmpresaMsg.trim().isEmpty()) {
-                        request.setAttribute("telefoneEmpresa", telefoneEmpresa);
+                        telefoneEmpresaMsg = ValidaUtils.validaTelefone("telefoneEmpresa", telefoneEmpresa);
+                        if (telefoneEmpresaMsg.trim().isEmpty()) {
+                            request.setAttribute("telefoneEmpresa", telefoneEmpresa);
+                        } else {
+                            telefoneEmpresaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                            request.setAttribute("telefoneEmpresaMsg", telefoneEmpresaMsg);
+                            isValid = false;
+                        }
                     } else {
                         telefoneEmpresaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
                         request.setAttribute("telefoneEmpresaMsg", telefoneEmpresaMsg);
@@ -185,7 +199,14 @@ public class ValidaRenovarConvenio extends HttpServlet {
             if (emailPessoaMsg.trim().isEmpty()) {
                 emailPessoaMsg = ValidaUtils.validaTamanho("emailPessoa", 50, emailPessoa);
                 if (emailPessoaMsg.trim().isEmpty()) {
-                    request.setAttribute("emailPessoa", emailPessoa);
+                    emailPessoaMsg = ValidaUtils.validaEmail("emailPessoa", emailPessoa);
+                    if (emailPessoaMsg.trim().isEmpty()) {
+                        request.setAttribute("emailPessoa", emailPessoa);
+                    } else {
+                        emailPessoaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                        request.setAttribute("emailPessoaMsg", emailPessoaMsg);
+                        isValid = false;
+                    }
                 } else {
                     emailPessoaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
                     request.setAttribute("emailPessoaMsg", emailPessoaMsg);
@@ -209,7 +230,14 @@ public class ValidaRenovarConvenio extends HttpServlet {
                     telefonePessoa = telefonePessoa.replaceAll("[.|/|-]", "");
                     telefonePessoaMsg = ValidaUtils.validaInteger("telefonePessoa", telefonePessoa);
                     if (telefonePessoaMsg.trim().isEmpty()) {
-                        request.setAttribute("telefonePessoa", telefonePessoa);
+                        telefonePessoaMsg = ValidaUtils.validaTelefone("telefonePessoa", telefonePessoa);
+                        if (telefonePessoaMsg.trim().isEmpty()) {
+                            request.setAttribute("telefonePessoa", telefonePessoa);
+                        } else {
+                            telefonePessoaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                            request.setAttribute("telefonePessoaMsg", telefonePessoaMsg);
+                            isValid = false;
+                        }
                     } else {
                         telefonePessoaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
                         request.setAttribute("telefonePessoaMsg", telefonePessoaMsg);

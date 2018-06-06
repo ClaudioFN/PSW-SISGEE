@@ -37,8 +37,8 @@
 				<%@include file="import_busca_aluno.jspf"%>
 				<div class="container">					
 
-                                    <button id="btnListarAditivo" type="submit" class="btn btn-secondary"><fmt:message key = "br.cefetrj.sisgee.resources.form.listarAditivos"/></button>
-
+                                    <button id="btnListarAditivo" type="submit" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.resources.form.listarAditivos"/></button>
+                                    <a id="btnListarAditivo" href="form_termo_rescisao.jsp" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.resources.form.rescisao"/></a>
 				</div>				
 				
 			</fieldset>

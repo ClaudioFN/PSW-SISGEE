@@ -45,9 +45,7 @@
                         <a class="dropdown-item" href="form_termo_aditivo.jsp">
                             <fmt:message key = "br.cefetrj.sisgee.resources.form.registroAditivo"/>
                         </a> 
-                        <a class="dropdown-item" href="FormTermoRescisaoServlet"> 
-                            <fmt:message key = "br.cefetrj.sisgee.resources.form.registroRescisao"/>
-                        </a>
+                        
                     </div>
                 </li>
 
