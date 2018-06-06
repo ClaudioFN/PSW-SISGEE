@@ -171,7 +171,6 @@ public class ValidaUtils {
 		return msg;
 	}	
 	
-	
 	/**
 	 * Método para validar a seleção de Estados (UFs)
 	 * 
