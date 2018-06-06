@@ -46,12 +46,9 @@ public class ValidaRenovarConvenio extends HttpServlet {
         
         String numero = (String)request.getSession().getAttribute("numero");
         
-        System.out.println(numero);
-        System.out.println("ENTROU NO VALIDAR RENOVAR CONVENIO");
         
         Convenio convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numero);
         
-        System.out.println("->>>>"+convenio.getNumeroConvenio());
         boolean isValid = true; 
         
         if(convenio.getEmpresa()!=null){
@@ -148,7 +145,7 @@ public class ValidaRenovarConvenio extends HttpServlet {
                 if (dataAssinaturaMsg.trim().isEmpty()) {
                     try {
                        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                       dataAssinaturaEmpresa = format.parse(dataAssinaturaConvenioPessoa);
+                       dataAssinaturaEmpresa = format.parse(dataAssinaturaConvenioEmpresa);
                         request.setAttribute("dataAssinaturaConvenioEmpresa", dataAssinaturaEmpresa);
                     } catch (Exception e) {
                         //TODO trocar saída de console por Log
@@ -243,7 +240,7 @@ public class ValidaRenovarConvenio extends HttpServlet {
                 if (dataAssinaturaMsg.trim().isEmpty()) {
                     try {
                        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                        dataAssinaturaPessoa = format.parse(dataAssinaturaConvenioPessoa);
+                        dataAssinaturaPessoa   = format.parse(dataAssinaturaConvenioPessoa);
                         request.setAttribute("dataAssinaturaConvenioPessoa", dataAssinaturaPessoa);
                     } catch (Exception e) {
                         //TODO trocar saída de console por Log

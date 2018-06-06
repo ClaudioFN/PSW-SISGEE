@@ -63,9 +63,8 @@
                                         <td>--</td>
                                         <td>${b.getDataInicioTermoEstagio2()}</td>
                                         <td>${b.getDataFimTermoEstagio2()}</td>
-                                        <td>${b.getConvenio().pegaNome()}</td>
                                         <td>${b.getConvenio().pegaCpf()}</td>
-                                        
+                                        <td>${b.getConvenio().pegaNome()}</td>
                                     </tr>
                                     <c:forEach items="${b.getTermosAditivos()}" var="c">
                                         <tr>
@@ -73,8 +72,8 @@
                                             <td>--</td>
                                             <td>${c.getDataCadastramentoTermoAditivo2()}</td>
                                             <td>${c.getDataFimTermoAditivo2()}</td>
-                                            <td>${b.getConvenio().pegaNome()}</td>
                                             <td>${b.getConvenio().pegaCpf()}</td>
+                                            <td>${b.getConvenio().pegaNome()}</td>
                                         </tr>   
                                     </c:forEach>
                                 </c:forEach>
